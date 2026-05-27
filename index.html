@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>شبابنا 2000 - تحميل التطبيق</title>
+  <meta name="description" content="دليل خدمات مهني محلي لشباب مركز إسنا - حمّل تطبيق شبابنا 2000 الآن">
+  <meta name="theme-color" content="#C5A059">
+
+  <!-- Inline script: تطبيق الثيم قبل رسم الصفحة لتجنب الوميض -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem('siteTheme') || 'light';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    /* ─────────────────────────────────────────
+       CUSTOM FONTS
+    ───────────────────────────────────────── */
+    @font-face {
+      font-family: 'Elektra';
+      src: url('Fonts/nasrt.ttf') format('truetype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Techno';
+      src: url('Fonts/techno.ttf') format('truetype');
+      font-display: swap;
+    }
+
+    /* ─────────────────────────────────────────
+       DESIGN TOKENS
+    ───────────────────────────────────────── */
+    :root {
+      --accent:       #C5A059;
+      --accent-dark:  #9e7a45;
+      --accent-light: #f0d898;
+
+      --bg:           #F4F6FB;
+      --bg-card:      #FFFFFF;
+      --bg-card-alt:  #F9FAFE;
+
+      --text:         #1A2540;
+      --text-sub:     #3D506E;
+      --text-muted:   #6B7FA0;
+
+      --border:       rgba(0, 0, 0, 0.07);
+      --shadow:       0 4px 20px rgba(0, 0, 0, 0.08);
+
+      --nav-bg:       #FFFFFF;
+      --nav-border:   #E8EDF5;
+      --progress-bg:  #E8EDF5;
+      --toggle-bg:    rgba(0, 0, 0, 0.1);
+
+      --radius-card:  1.25rem;
+      --radius-btn:   0.75rem;
+      --transition:   0.3s ease;
+    }
+
+    html[data-theme="dark"] {
+      --bg:           #0B0F1A;
+      --bg-card:      #141A2E;
+      --bg-card-alt:  #0F1320;
+
+      --text:         #E4ECF7;
+      --text-sub:     #94A8C8;
+      --text-muted:   #5C6E8A;
+
+      --border:       rgba(255, 255, 255, 0.07);
+      --shadow:       0 4px 20px rgba(0, 0, 0, 0.4);
+
+      --nav-bg:       #141A2E;
+      --nav-border:   rgba(255, 255, 255, 0.08);
+      --progress-bg:  rgba(255, 255, 255, 0.1);
+      --toggle-bg:    rgba(255, 255, 255, 0.12);
+    }
+
+    /* ─────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────── */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      width: 100%;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ─────────────────────────────────────────
+       HEADER
+    ───────────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--accent);
+      width: 100%;
+    }
+
+    .header-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 56px;
+      min-height: 50px;
+    }
+
+    .brand-name {
+      font-family: 'Elektra', 'Cairo', sans-serif;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn-theme {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: var(--toggle-bg);
+      color: #fff;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+      z-index: 1;
+    }
+    .btn-theme:hover { background: rgba(255, 255, 255, 0.25); }
+
+    /* ─────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────── */
+    .site-nav {
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--nav-border);
+      width: 100%;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .site-nav ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      list-style: none;
+      padding: 0.45rem 0.5rem;
+      margin: 0;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-sub);
+      font-weight: 600;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    .nav-link:hover,
+    .nav-link.active { color: var(--accent); }
+
+    /* ─────────────────────────────────────────
+       MAIN
+    ───────────────────────────────────────── */
+    main {
+      flex: 1;
+      width: 100%;
+      padding: 0.75rem 0.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    /* ─────────────────────────────────────────
+       CARD
+    ───────────────────────────────────────── */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      width: 100%;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .card--padded { padding: 1rem; }
+
+    /* ─────────────────────────────────────────
+       APP HERO
+    ───────────────────────────────────────── */
+    .app-hero {
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .app-icon-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .app-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 0.5rem;
+      object-fit: cover;
+      box-shadow: 0 5px 16px rgba(197, 160, 89, 0.3);
+      border: 2px solid rgba(197, 160, 89, 0.15);
+      display: block;
+    }
+
+    /* Fallback icon عند فشل تحميل الصورة */
+    .app-icon--fallback {
+      width: 72px;
+      height: 72px;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, #C5A059, #9e7a45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 2rem;
+    }
+
+    .badge-new {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #22c55e;
+      color: #fff;
+      font-size: 0.52rem;
+      font-weight: 800;
+      padding: 2px 5px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .app-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .app-title {
+      font-family: 'Elektra', 'Cairo', sans-serif;
+      font-weight: bold;
+      font-size: 1.15rem;
+      background: linear-gradient(120deg, var(--accent), #e6c27a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.25;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .app-dev {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .app-dev strong { color: var(--accent); }
+
+    .app-meta {
+      display: flex;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-chip {
+      background: rgba(197, 160, 89, 0.1);
+      color: var(--accent-dark);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+    }
+    html[data-theme="dark"] .meta-chip {
+      background: rgba(197, 160, 89, 0.15);
+      color: var(--accent-light);
+    }
+
+    /* ─────────────────────────────────────────
+       SECTION TITLE
+    ───────────────────────────────────────── */
+    .section-title {
+      font-family: 'Elektra', 'Cairo', sans-serif;
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-title i { color: var(--accent); }
+
+    /* ─────────────────────────────────────────
+       DESCRIPTION
+    ───────────────────────────────────────── */
+    .description-text {
+      font-size: 0.85rem;
+      line-height: 1.75;
+      color: var(--text-sub);
+    }
+
+    .description-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .description-list li {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: 0.65rem;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.82rem;
+    }
+
+    .desc-quote {
+      border-right: 3px solid var(--accent);
+      padding-right: 0.7rem;
+      margin-top: 0.7rem;
+      font-style: italic;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .btn-toggle-desc {
+      margin-top: 0.5rem;
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0;
+    }
+
+    /* ─────────────────────────────────────────
+       DOWNLOAD
+    ───────────────────────────────────────── */
+    .download-wrapper {
+      margin-top: 0.9rem;
+    }
+
+    .download-area {
+      background: var(--bg-card-alt);
+      border-radius: 0.75rem;
+      padding: 5px;
+      width: 100%;
+    }
+
+    .btn-download {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: var(--radius-btn);
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 5px 16px rgba(197, 160, 89, 0.3);
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: transform 0.15s;
+    }
+
+    /* shimmer effect */
+    .btn-download::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s;
+    }
+    .btn-download:hover::before    { transform: translateX(100%); }
+    .btn-download:active           { transform: scale(0.98); }
+    .btn-download:disabled         { opacity: 0.7; cursor: not-allowed; }
+
+    .download-note {
+      text-align: center;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      margin-top: 0.45rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .progress-wrap {
+      margin-top: 0.55rem;
+      background: var(--progress-bg);
+      border-radius: 40px;
+      height: 5px;
+      display: none;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 40px;
+      transition: width 0.1s linear;
+    }
+
+    /* ─────────────────────────────────────────
+       GALLERY
+    ───────────────────────────────────────── */
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .gallery-header .section-title { margin-bottom: 0; }
+
+    .gallery-hint {
+      font-size: 0.63rem;
+      color: var(--text-muted);
+      background: var(--bg-card-alt);
+      padding: 3px 8px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .screenshots-scroll {
+      display: flex;
+      gap: 0.6rem;
+      overflow-x: auto;
+      overflow-y: visible;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding-bottom: 0.4rem;
+      width: 100%;
+    }
+    .screenshots-scroll::-webkit-scrollbar { display: none; }
+
+    .screenshot-img {
+      width: 115px;
+      height: 230px;
+      border-radius: 0.9rem;
+      object-fit: cover;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      display: block;
+      transition: transform 0.2s;
+    }
+    .screenshot-img:active { transform: scale(0.97); }
+
+    /* ─────────────────────────────────────────
+       DEVELOPERS
+    ───────────────────────────────────────── */
+    .devs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+      width: 100%;
+    }
+
+    .dev-card {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 0.85rem 0.5rem;
+      text-align: center;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .dev-name {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .social-links {
+      background: var(--bg-card);
+      border-radius: 40px;
+      padding: 0.35rem 0.5rem;
+      display: inline-flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      border: 1px solid var(--border);
+      max-width: 100%;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .social-link img {
+      width: 26px;
+      height: 26px;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .social-link i {
+      font-size: 1.25rem;
+      color: var(--accent);
+    }
+
+    /* ─────────────────────────────────────────
+       LIGHTBOX
+    ───────────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .lightbox.open { display: flex; }
+
+    .lightbox-img {
+      max-width: 88vw;
+      max-height: 78dvh;
+      object-fit: contain;
+      border-radius: 0.75rem;
+      display: block;
+    }
+
+    .lightbox-btn {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .lightbox-close { top: 12px; left: 12px; }
+
+    .lightbox-nav {
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+    }
+    .lightbox-nav--prev { right: 8px; }
+    .lightbox-nav--next { left: 8px; }
+
+    /* ─────────────────────────────────────────
+       TOAST
+    ───────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1a2540;
+      color: #fff;
+      padding: 0.5rem 1.1rem;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      white-space: nowrap;
+      max-width: calc(100vw - 2rem);
+      text-align: center;
+    }
+    html[data-theme="dark"] .toast {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--nav-border);
+      color: var(--text-muted);
+      text-align: center;
+      padding: 0.75rem;
+      font-size: 0.68rem;
+      margin-top: auto;
+      width: 100%;
+    }
+    .site-footer i { color: var(--accent); margin-left: 3px; }
+
+    /* ─────────────────────────────────────────
+       ANIMATIONS
+    ───────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    main > * { animation: fadeUp 0.35s ease both; }
+    main > *:nth-child(1) { animation-delay: 0.05s; }
+    main > *:nth-child(2) { animation-delay: 0.10s; }
+    main > *:nth-child(3) { animation-delay: 0.15s; }
+    main > *:nth-child(4) { animation-delay: 0.20s; }
+    main > *:nth-child(5) { animation-delay: 0.25s; }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE — ≤390px
+    ───────────────────────────────────────── */
+    @media (max-width: 390px) {
+      .brand-name           { font-size: 1rem; }
+      .btn-theme            { width: 33px; height: 33px; font-size: 0.8rem; }
+      .nav-link             { font-size: 0.67rem; gap: 2px; }
+      .app-icon             { width: 60px; height: 60px; }
+      .app-title            { font-size: 0.98rem; }
+      .app-dev              { font-size: 0.65rem; }
+      .meta-chip            { font-size: 0.6rem; padding: 2px 6px; }
+      .section-title        { font-size: 0.82rem; }
+      .description-text     { font-size: 0.78rem; }
+      .description-list li  { font-size: 0.75rem; }
+      .desc-quote           { font-size: 0.72rem; }
+      .btn-toggle-desc      { font-size: 0.72rem; }
+      .btn-download         { font-size: 0.82rem; padding: 0.7rem 0.85rem; }
+      .download-note        { font-size: 0.62rem; }
+      .gallery-hint         { font-size: 0.58rem; }
+      .screenshot-img       { width: 100px; height: 200px; }
+      .dev-name             { font-size: 0.75rem; }
+      .site-footer          { font-size: 0.6rem; }
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE — ≤320px
+    ───────────────────────────────────────── */
+    @media (max-width: 320px) {
+      .brand-name           { font-size: 0.88rem; }
+      .nav-link             { font-size: 0.6rem; }
+      .app-icon             { width: 52px; height: 52px; }
+      .app-title            { font-size: 0.88rem; }
+      .meta-chip            { font-size: 0.55rem; padding: 1px 5px; }
+      .section-title        { font-size: 0.75rem; }
+      .description-text     { font-size: 0.72rem; line-height: 1.6; }
+      .btn-download         { font-size: 0.75rem; padding: 0.65rem 0.75rem; }
+      .screenshot-img       { width: 88px; height: 176px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+═══════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <span class="brand-name">شبابنا 2000</span>
+    <button class="btn-theme" id="btnTheme" aria-label="تبديل الوضع الليلي/النهاري">
+      <i id="themeIcon" class="fas fa-moon"></i>
+    </button>
+  </div>
+
+  <nav class="site-nav" role="navigation" aria-label="القائمة الرئيسية">
+    <ul>
+      <li><a href="#"            class="nav-link active"><i class="fas fa-home"></i> الرئيسية</a></li>
+      <li><a href="#about"       class="nav-link"><i class="fas fa-info-circle"></i> نبذة</a></li>
+      <li><a href="#gallery"     class="nav-link"><i class="fas fa-images"></i> معاينة</a></li>
+      <li><a href="PrivacyPolicy.html" class="nav-link"><i class="fas fa-shield-alt"></i> الخصوصية</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ═══════════════════════════════════════
+     MAIN
+═══════════════════════════════════════ -->
+<main role="main">
+
+  <!-- APP HERO -->
+  <div class="card">
+    <div class="app-hero">
+      <div class="app-icon-wrap">
+        <img id="appIcon"
+             src="icon.png"
+             alt="أيقونة شبابنا 2000"
+             class="app-icon"
+             loading="lazy">
+        <span class="badge-new">جديد</span>
+      </div>
+      <div class="app-info">
+        <div class="app-title">تطبيق شبابنا 2000</div>
+        <div class="app-dev">بواسطة <strong>XERNEL &amp; GnanOoTECH</strong></div>
+        <div class="app-meta">
+          <span class="meta-chip"><i class="fas fa-map-marker-alt"></i> إسنا</span>
+          <span class="meta-chip"><i class="fab fa-android"></i> Android</span>
+          <span class="meta-chip"><i class="fas fa-unlock-alt"></i> مجاني</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT + DOWNLOAD -->
+  <section id="about" class="card card--padded" aria-label="نبذة عن التطبيق">
+    <div class="section-title"><i class="fas fa-info-circle"></i> نبذة عن التطبيق</div>
+
+    <p class="description-text">
+      شباب إسنا الرقمية لخدمة أبناء المركز؛ <strong>شبابنا 2000</strong> دليل مهني يربطك
+      بالحرفيين والكفاءات المحلية، و<strong>سوق إسنا الرقمي</strong> منصة للبيع والشراء
+      تجمع عروض المنتجات من جميع أنحاء المركز في مكان واحد.
+    </p>
+
+    <div id="extraDesc" hidden>
+      <ul class="description-list description-text">
+        <li>🔍 <strong>دليل الحرفيين والمهنيين</strong> — ابحث بالاسم أو التخصص وتواصل مباشرةً مع أصحاب الكفاءات</li>
+        <li>🛍️ <strong>سوق رقمي متكامل</strong> — تصفح وأعلن عن منتجاتك بصور وتفاصيل كاملة عبر تصنيفات متنوعة</li>
+        <li>📢 <strong>إعلانات الوظائف والفرص</strong> — فرص عمل ومستجدات متجددة في متناول يدك</li>
+        <li>⭐ <strong>تقييم وتفاعل مجتمعي</strong> — قيّم من تعاملت معهم وساهم في بناء سمعة موثوقة</li>
+        <li>💡 <strong>تطوير مستمر بمشاركتك</strong> — أرسل مقترحاتك وكن جزءاً من مسيرة التحسين</li>
+        <li>🤲 <strong>بُعد اجتماعي وخيري</strong> — إعلانات خيرية تعزز روح التكافل بين أبناء إسنا</li>
+      </ul>
+      <div class="desc-quote">"شبابنا وسوقنا" — منظومة رقمية متكاملة، من إسنا وإلى إسنا.</div>
+    </div>
+
+    <button class="btn-toggle-desc" id="btnToggleDesc" aria-expanded="false" aria-controls="extraDesc">
+      <i class="fas fa-chevron-down" style="font-size:.65rem" id="toggleIcon"></i>
+      <span id="toggleText">عرض المزيد</span>
+    </button>
+
+    <div class="download-wrapper">
+      <div class="download-area">
+        <button class="btn-download" id="btnDownload" aria-label="تحميل تطبيق شبابنا 2000">
+          <i class="fab fa-android" style="font-size:1.2rem"></i>
+          <span id="downloadText">تحميل التطبيق</span>
+        </button>
+        <div class="progress-wrap" id="progressWrap">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <p class="download-note">
+        <i class="fas fa-shield-alt"></i> آمن للتحميل · ملف APK مباشر
+      </p>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="card card--padded" aria-label="معاينة التطبيق">
+    <div class="gallery-header">
+      <div class="section-title"><i class="fas fa-mobile-alt"></i> معاينة التطبيق</div>
+      <span class="gallery-hint"><i class="fas fa-arrows-alt-h"></i> اسحب</span>
+    </div>
+    <div id="screenshotsContainer" class="screenshots-scroll" role="region" aria-label="صور معاينة التطبيق"></div>
+  </section>
+
+  <!-- DEVELOPERS -->
+  <div class="card card--padded">
+    <div class="section-title"><i class="fas fa-code"></i> المطورون</div>
+    <div class="devs-grid">
+      <div class="dev-card">
+        <div class="dev-name"><i class="fas fa-code"></i> XERNEL</div>
+        <div id="socialXERNEL" class="social-links" role="list"></div>
+      </div>
+      <div class="dev-card">
+        <div class="dev-name"><i class="fas fa-microchip"></i> GnanOoTECH</div>
+        <div id="socialGnanOoTECH" class="social-links" role="list"></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══════════════════════════════════════
+     LIGHTBOX
+═══════════════════════════════════════ -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="عارض الصور">
+  <button class="lightbox-btn lightbox-close" id="btnCloseLightbox" aria-label="إغلاق">&times;</button>
+  <button class="lightbox-btn lightbox-nav lightbox-nav--prev" id="btnPrev" aria-label="السابق">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+  <img id="lightboxImg" src="" alt="لقطة شاشة مكبرة" class="lightbox-img">
+  <button class="lightbox-btn lightbox-nav lightbox-nav--next" id="btnNext" aria-label="التالي">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer class="site-footer" role="contentinfo">
+  <i class="fas fa-crown"></i>
+  <span>All Rights Reserved - XERNEL &amp; GnanOoTECH</span>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+  'use strict';
+
+  /* ─── CONFIG ─────────────────────────────────── */
+  const CONFIG = {
+    accentColor:       '#C5A059',
+    downloadUrl:       'https://github.com/XERNEL0x58/shababna2000/releases/download/shababna2000/shababna2000v2.apk',
+    downloadFileName:  'Shababna2000.apk',
+    screenshotsFolder: 'ScreenShots/',
+    screenshotCount:   13,
+    iconPath:          'icon.png',
+    social: {
+      XERNEL:      { facebook: 'https://facebook.com/XERNEL0x58' },
+      GnanOoTECH:  { facebook: 'https://facebook.com/GnanOoTECH' }
+    },
+    socialIconsPath: 'SocialMedia/',
+    socialIconMap: {
+      facebook:  'facebook.png',
+      twitter:   'twitter.png',
+      instagram: 'instagram.png',
+      telegram:  'telegram.png',
+      github:    'github.png'
+    }
+  };
+
+  /* ─── THEME ───────────────────────────────────── */
+  const htmlEl    = document.documentElement;
+  const btnTheme  = document.getElementById('btnTheme');
+  const themeIcon = document.getElementById('themeIcon');
+
+  function applyTheme(theme) {
+    htmlEl.setAttribute('data-theme', theme);
+    localStorage.setItem('siteTheme', theme);
+    themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+  }
+
+  // تطبيق الثيم المحفوظ عند التحميل
+  applyTheme(localStorage.getItem('siteTheme') || 'light');
+
+  btnTheme.addEventListener('click', () => {
+    applyTheme(htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+  });
+
+  /* ─── APP ICON FALLBACK ───────────────────────── */
+  document.getElementById('appIcon').addEventListener('error', function () {
+    const fallback = document.createElement('div');
+    fallback.className = 'app-icon--fallback';
+    fallback.innerHTML = '<i class="fab fa-android"></i>';
+    this.replaceWith(fallback);
+  });
+
+  /* ─── SOCIAL LINKS ────────────────────────────── */
+  function buildSocialLinks(socialObj, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const fragment = document.createDocumentFragment();
+
+    for (const [platform, url] of Object.entries(socialObj)) {
+      if (!url || url === '#') continue;
+
+      const a   = document.createElement('a');
+      const img = document.createElement('img');
+
+      a.href             = url;
+      a.target           = '_blank';
+      a.rel              = 'noopener noreferrer';
+      a.className        = 'social-link';
+      a.setAttribute('aria-label', platform);
+      a.setAttribute('role', 'listitem');
+
+      img.src     = `${CONFIG.socialIconsPath}${CONFIG.socialIconMap[platform] || platform + '.png'}`;
+      img.alt     = platform;
+      img.loading = 'lazy';
+      img.addEventListener('error', function () {
+        this.replaceWith(Object.assign(document.createElement('i'), {
+          className: `fab fa-${platform}`
+        }));
+      });
+
+      a.appendChild(img);
+      fragment.appendChild(a);
+    }
+
+    container.appendChild(fragment);
+  }
+
+  buildSocialLinks(CONFIG.social.XERNEL,     'socialXERNEL');
+  buildSocialLinks(CONFIG.social.GnanOoTECH, 'socialGnanOoTECH');
+
+  /* ─── DESCRIPTION TOGGLE ─────────────────────── */
+  const extraDesc    = document.getElementById('extraDesc');
+  const btnToggle    = document.getElementById('btnToggleDesc');
+  const toggleText   = document.getElementById('toggleText');
+  const toggleIcon   = document.getElementById('toggleIcon');
+
+  btnToggle.addEventListener('click', () => {
+    const isExpanded = btnToggle.getAttribute('aria-expanded') === 'true';
+
+    // استخدام hidden بدلاً من style.display
+    extraDesc.hidden = isExpanded;
+    btnToggle.setAttribute('aria-expanded', String(!isExpanded));
+    toggleText.textContent  = isExpanded ? 'عرض المزيد' : 'عرض أقل';
+    toggleIcon.className    = isExpanded ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+  });
+
+  /* ─── TOAST ───────────────────────────────────── */
+  const toastEl = document.getElementById('toast');
+  let toastTimer = null;
+
+  function showToast(message) {
+    toastEl.textContent = message;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2500);
+  }
+
+  /* ─── DOWNLOAD ────────────────────────────────── */
+  const btnDownload  = document.getElementById('btnDownload');
+  const downloadText = document.getElementById('downloadText');
+  const progressWrap = document.getElementById('progressWrap');
+  const progressFill = document.getElementById('progressFill');
+
+  let isDownloading  = false;
+  let progressInterval = null;
+
+  function triggerDownload() {
+    const a    = document.createElement('a');
+    a.href     = CONFIG.downloadUrl;
+    a.download = CONFIG.downloadFileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  function resetDownloadUI() {
+    downloadText.innerHTML   = 'تحميل التطبيق';
+    btnDownload.disabled     = false;
+    progressWrap.style.display = 'none';
+    progressFill.style.width   = '0%';
+    isDownloading = false;
+  }
+
+  function startDownload() {
+    if (isDownloading) return;
+    isDownloading = true;
+
+    btnDownload.disabled       = true;
+    downloadText.innerHTML     = '<i class="fas fa-spinner fa-pulse"></i> جاري التحميل...';
+    progressWrap.style.display = 'block';
+
+    let pct = 0;
+    progressInterval = setInterval(() => {
+      pct += Math.floor(Math.random() * 15) + 5;
+      if (pct >= 100) {
+        clearInterval(progressInterval);
+        progressFill.style.width = '100%';
+        setTimeout(() => {
+          triggerDownload();
+          showToast('✓ بدء تحميل التطبيق!');
+          resetDownloadUI();
+        }, 300);
+      } else {
+        progressFill.style.width = pct + '%';
+      }
+    }, 120);
+  }
+
+  btnDownload.addEventListener('click', startDownload);
+
+  /* ─── SCREENSHOTS ─────────────────────────────── */
+  const screenshotsList = [];
+  let   lightboxIndex   = 0;
+
+  const screenshotsContainer = document.getElementById('screenshotsContainer');
+
+  function loadScreenshots() {
+    const total     = CONFIG.screenshotCount;
+    const slots     = new Array(total).fill(null);  // حجز الترتيب
+    let   loadedCount = 0;
+
+    // إضافة الصور إلى DOM بالترتيب الصحيح
+    function flushRendered() {
+      for (let i = 0; i < total; i++) {
+        if (slots[i] && !slots[i].rendered) {
+          slots[i].rendered = true;
+
+          const src   = slots[i].src;
+          const index = screenshotsList.push(src) - 1;
+
+          const img = document.createElement('img');
+          img.src          = src;
+          img.className    = 'screenshot-img';
+          img.alt          = `لقطة شاشة ${i + 1}`;
+          img.loading      = 'lazy';
+          img.dataset.index = index;
+          img.addEventListener('click', () => openLightbox(Number(img.dataset.index)));
+
+          screenshotsContainer.appendChild(img);
+        }
+      }
+    }
+
+    function tryLoad(index, extensions, extIdx) {
+      if (extIdx >= extensions.length) {
+        // لا توجد صورة بأي امتداد
+        loadedCount++;
+        return;
+      }
+
+      const img = new Image();
+      img.onload = () => {
+        slots[index] = { src: img.src };
+        loadedCount++;
+        flushRendered();
+      };
+      img.onerror = () => tryLoad(index, extensions, extIdx + 1);
+      img.src = `${CONFIG.screenshotsFolder}screenshot${index + 1}.${extensions[extIdx]}`;
+    }
+
+    for (let i = 0; i < total; i++) {
+      tryLoad(i, ['png', 'jpg'], 0);
+    }
+  }
+
+  /* ─── LIGHTBOX ────────────────────────────────── */
+  const lightboxEl  = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+
+  function openLightbox(index) {
+    if (!screenshotsList.length) return;
+    lightboxIndex = index;
+    lightboxImg.src = screenshotsList[lightboxIndex];
+    lightboxEl.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightboxEl.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function navigateLightbox(delta) {
+    if (!screenshotsList.length) return;
+    lightboxIndex = (lightboxIndex + delta + screenshotsList.length) % screenshotsList.length;
+    lightboxImg.src = screenshotsList[lightboxIndex];
+  }
+
+  // Event listeners للـ lightbox
+  document.getElementById('btnCloseLightbox').addEventListener('click', closeLightbox);
+  document.getElementById('btnPrev').addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
+  document.getElementById('btnNext').addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
+
+  lightboxEl.addEventListener('click', (e) => {
+    if (e.target === lightboxEl) closeLightbox();
+  });
+
+  // keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lightboxEl.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowRight') navigateLightbox(-1);
+    if (e.key === 'ArrowLeft')  navigateLightbox(1);
+  });
+
+  /* ─── INIT ────────────────────────────────────── */
+  loadScreenshots();
+</script>
+</body>
+</html>
